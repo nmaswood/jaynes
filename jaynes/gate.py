@@ -1,15 +1,10 @@
-# from abc import ABC
 from typing import Union, cast
 from dataclasses import dataclass
 
 
 class Gate():
-
-    def evaluate(self):
-        pass
-
-    def compose(*args):
-        pass
+    def evaluate(self) -> bool:
+        raise NotImplementedError
 
 
 @dataclass
@@ -46,3 +41,30 @@ class Not(Gate):
 
     def evaluate(self) -> bool:
         return not self.A.recurse()
+
+
+@dataclass
+class Nand(Gate):
+    A: GateInput
+    B: GateInput
+
+    def evaluate(self) -> bool:
+        return not And(self.A, self.B).evaluate()
+
+
+@dataclass
+class Nor(Gate):
+    A: GateInput
+    B: GateInput
+
+    def evaluate(self) -> bool:
+        return not Or(self.A, self.B).evaluate()
+
+
+@dataclass
+class Xor(Gate):
+    A: GateInput
+    B: GateInput
+
+    def evaluate(self) -> bool:
+        return bool(self.A.recurse() ^ self.B.recurse())
