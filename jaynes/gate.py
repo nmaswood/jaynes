@@ -1,5 +1,6 @@
-from typing import Union, cast
 from dataclasses import dataclass
+from itertools import combinations
+from typing import List, Tuple, Union, cast
 
 
 class Gate():
@@ -7,14 +8,13 @@ class Gate():
         raise NotImplementedError
 
 
-@dataclass
-class GateInput:
-    value: Union[Gate, bool]
+GateInput = Union[Gate, bool]
 
-    def recurse(self) -> bool:
-        if type(self.value) == bool:
-            return cast(bool, self.value)
-        return cast(Gate, self.value).evaluate()
+
+def _recurse(input_gate) -> bool:
+    if type(input_gate) == bool:
+        return cast(bool, input_gate)
+    return cast(Gate, input_gate).evaluate()
 
 
 @dataclass
@@ -23,7 +23,7 @@ class And(Gate):
     B: GateInput
 
     def evaluate(self) -> bool:
-        return self.A.recurse() and self.B.recurse()
+        return _recurse(self.A) and _recurse(self.B)
 
 
 @dataclass
@@ -32,7 +32,7 @@ class Or(Gate):
     B: GateInput
 
     def evaluate(self) -> bool:
-        return self.A.recurse() or self.B.recurse()
+        return _recurse(self.A) or _recurse(self.B)
 
 
 @dataclass
@@ -40,7 +40,7 @@ class Not(Gate):
     A: GateInput
 
     def evaluate(self) -> bool:
-        return not self.A.recurse()
+        return not _recurse(self.A)
 
 
 @dataclass
@@ -67,4 +67,18 @@ class Xor(Gate):
     B: GateInput
 
     def evaluate(self) -> bool:
-        return bool(self.A.recurse() ^ self.B.recurse())
+        return bool(_recurse(self.A) ^ _recurse(self.B))
+
+
+def possible_truth_values(n: int) -> List[Tuple[bool]]:
+    init_set = [[True], [False]]
+
+    for i in range(n - 1):
+        result_set = []
+
+        for value in init_set:
+            for truth_value in [True, False]:
+                value_prime = list(value + [truth_value])
+                result_set.append(value_prime)
+        init_set = result_set
+    return result_set
