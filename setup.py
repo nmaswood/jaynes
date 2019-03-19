@@ -2,7 +2,7 @@ from typing import List
 
 from setuptools import find_packages, setup
 
-REQUIRED_PACKAGES: List[str] = []
+REQUIRED_PACKAGES: List[str] = ['pymc3']
 DEV_PACKAGES: List[str] = ['mypy', 'flake8', 'pytest']
 
 version = '0.0.1'
