@@ -1,2 +1,7 @@
 # jaynes
-Probability utils as I work through the jaynes textbook
+
+
+* Notes for E.T. Jaynes text book
+* Various hands on projects
+  * Email Parsing Utils
+  * Spam Detector
