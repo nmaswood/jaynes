@@ -121,7 +121,7 @@ def get_label(file_name):
 
 def process_emails() -> List[Email]:
     path = os.path.join(ROOT_DIR, MAIL_DIR, '*.mbox')
-    return glob(path)
+    email_paths = glob(path)
     emails: List[Email] = []
     for email_path in email_paths:
         mboxs = mailbox.mbox(email_path)
@@ -139,26 +139,6 @@ def write_emails(dir_: str, emails: List[Email]) -> None:
             json.dump(email.__dict__, outfile)
 
 
-def strip_non_content(html):
-    soup = BeautifulSoup(html, 'html.parser')
-    for s in soup(['script', 'style']):
-        s.decompose()
-    return ' '.join(soup.stripped_strings)
-
-
-def clean_text(text):
-
-    text = text.lower()
-    text = re.sub(r"\s+", ' ', text).strip()
-    text = re.sub(r'\.{5,}', '', text)
-    text = re.sub(r'\*{5,}', '', text)
-    text = re.sub(r'-{5,}', '', text)
-    text = re.sub(r'_{5,}', '', text)
-    text = re.sub(r'(\d{1,3} \d{1,3}){1,}', '', text)
-
-    return text
-
-
 def read_emails(dir_: str = DERIVED_DIR,
                 limit=float('inf'),
                 clean: bool = True) -> List[Email]:
@@ -169,8 +149,8 @@ def read_emails(dir_: str = DERIVED_DIR,
             email = json.load(infile)
             if clean:
 
-                text = strip_non_content(email['body'])
-                text = clean_text(text)
+                text = text_utils.strip_non_content(email['body'])
+                text = text_utils.clean_text(text)
                 email['body'] = text
 
             email_object = from_json(email)
