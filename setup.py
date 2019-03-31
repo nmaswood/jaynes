@@ -2,8 +2,14 @@ from typing import List
 
 from setuptools import find_packages, setup
 
-REQUIRED_PACKAGES: List[str] = ['pymc3']
-DEV_PACKAGES: List[str] = ['mypy', 'flake8', 'pytest']
+REQUIRED_PACKAGES: List[str] = [
+    'pymc3',
+    'python-dateutil',
+    'beautifulsoup4',
+]
+DEV_PACKAGES: List[str] = [
+    'mypy', 'flake8', 'pytest', 'python-language-server[all]'
+]
 GOOGLE_AUTH_PACKAGES: List[str] = [
     'google-api-python-client',
     'google-auth-httplib2',

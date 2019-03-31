@@ -1,5 +1,4 @@
 from dataclasses import dataclass
-from itertools import combinations
 from typing import List, Tuple, Union, cast
 
 
@@ -12,7 +11,7 @@ GateInput = Union[Gate, bool]
 
 
 def _recurse(input_gate) -> bool:
-    if type(input_gate) == bool:
+    if isinstance(input_gate, bool):
         return cast(bool, input_gate)
     return cast(Gate, input_gate).evaluate()
 
@@ -73,7 +72,7 @@ class Xor(Gate):
 def possible_truth_values(n: int) -> List[Tuple[bool]]:
     init_set = [[True], [False]]
 
-    for i in range(n - 1):
+    for _ in range(n - 1):
         result_set = []
 
         for value in init_set:
