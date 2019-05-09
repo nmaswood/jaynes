@@ -3,9 +3,7 @@ from typing import List
 from setuptools import find_packages, setup
 
 REQUIRED_PACKAGES: List[str] = [
-    'pymc3',
-    'python-dateutil',
-    'beautifulsoup4',
+    'pymc3', 'python-dateutil', 'beautifulsoup4', 'scikit-learn'
 ]
 DEV_PACKAGES: List[str] = [
     'mypy', 'flake8', 'pytest', 'python-language-server[all]'
@@ -27,3 +25,7 @@ setup(
     description=('Probability utils'),
     extras_require={'dev': DEV_PACKAGES},
 )
+
+# conda install -c conda-forge jupyter_contrib_nbextensions
+
+
