@@ -3,7 +3,8 @@ from typing import List
 from setuptools import find_packages, setup
 
 REQUIRED_PACKAGES: List[str] = [
-    'pymc3', 'python-dateutil', 'beautifulsoup4', 'scikit-learn'
+    'pymc3', 'python-dateutil', 'beautifulsoup4', 'scikit-learn', 'numpy',
+    'scipy', 'matplotlib'
 ]
 DEV_PACKAGES: List[str] = [
     'mypy', 'flake8', 'pytest', 'python-language-server[all]'
@@ -27,5 +28,3 @@ setup(
 )
 
 # conda install -c conda-forge jupyter_contrib_nbextensions
-
-
