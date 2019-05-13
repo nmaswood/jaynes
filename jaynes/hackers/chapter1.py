@@ -195,7 +195,7 @@ def texting(graph_init=False):
              alpha=0.85,
              label="posterior of $\lambda_1$",
              color="#A60628",
-             normed=True)
+             density=True)
     plt.legend(loc="upper left")
     plt.title(r"""Posterior distributions of the variables
         $\lambda_1,\;\lambda_2,\;\tau$""")
@@ -210,7 +210,7 @@ def texting(graph_init=False):
              alpha=0.85,
              label="posterior of $\lambda_2$",
              color="#7A68A6",
-             normed=True)
+             density=True)
     plt.legend(loc="upper left")
     plt.xlim([15, 30])
     plt.xlabel("$\lambda_2$ value")
@@ -224,13 +224,14 @@ def texting(graph_init=False):
              color="#467821",
              weights=w,
              rwidth=2.)
-    plt.xticks(np.arange(n_count_data))
+    # plt.xticks(np.arange(n_count_data))
 
-    plt.legend(loc="upper left")
-    plt.ylim([0, .75])
-    plt.xlim([35, len(count_data) - 20])
-    plt.xlabel(r"$\tau$ (in days)")
-    plt.ylabel("probability")
+    # plt.legend(loc="upper left")
+    # plt.ylim([0, .75])
+    # plt.xlim([35, len(count_data) - 20])
+    # plt.xlabel(r"$\tau$ (in days)")
+    # plt.ylabel("probability")
+    # plt.show()
 
 
-texting()
+# texting()
